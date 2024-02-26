@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 final class DescriptionViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -15,30 +14,42 @@ final class DescriptionViewController: UIViewController {
     
     //MARK: VARIABLE
     var article: Article?
+    let descriptionViewModel = DescriptionViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.text = article?.title
-        titleLabel.numberOfLines = 0
-        contentLabel.text = article?.content
-        contentLabel.numberOfLines = 0
-        
-        indicatorView.isHidden = false
-        indicatorView.startAnimating()
+        setTextOrEmpty(article?.title, for: titleLabel)
+        setTextOrEmpty(article?.content, for: contentLabel)
         getImage()
     }
 }
 //MARK: FUNCTION
 extension DescriptionViewController{
+    func setTextOrEmpty(_ text: String?, for label: UILabel){
+        label.text = text ?? "Empty \(label.accessibilityIdentifier ?? "Field")"
+    }
+    
     func getImage(){
         if let imageUrlString = article?.urlToImage {
-            NetworkManager.shared.loadImage(from: imageUrlString) { [weak self] responseData in
-                DispatchQueue.main.async {
-                    self?.indicatorView.stopAnimating()
-                    self?.indicatorView.isHidden = true
-                    let image = UIImage(data: responseData!, scale: 1)
-                    self?.imageView.image = image
+            indicatorView.isHidden = false
+            indicatorView.startAnimating()
+            descriptionViewModel.loadImage(from: imageUrlString) { [weak self] responseData, error in
+                self?.indicatorView.stopAnimating()
+                self?.indicatorView.isHidden = true
+                if let response = responseData{
+                    DispatchQueue.main.async {
+                        let image = UIImage(data: response, scale: 1)
+                        self?.imageView.image = image
+                    }
+                }
+                else{
+                    print(error!)
                 }
             }
+        }
+        else{
+            imageView.image = UIImage(named: "noResult")
+            indicatorView.stopAnimating()
+            indicatorView.isHidden = true
         }
     }
 }

@@ -13,7 +13,7 @@ final class HomeViewModel {
     
     func fetchData(completion: @escaping((News?, String?) -> Void)) {
         if let apiUrl = URL(string:"\(url)/top-headlines?country=us\(apiKey)"){
-            NetworkManager.shared.request(url: apiUrl, method: .get) { (result: Result<News, ErrorTypes>) in
+            NetworkManager.shared.request(from: apiUrl, method: .get) { (result: Result<News, ErrorTypes>) in
                 switch result {
                 case .success(let data):
                     //print(data)

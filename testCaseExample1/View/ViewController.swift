@@ -26,7 +26,7 @@ extension ViewController{
     func fetchData(){
         homeViewModel.fetchData { response, error in
             if let response = response{
-                self.newsItem = response.articles
+                self.newsItem = self.filterData(data: response)
                 //print(response)
             }else{
                 print(error!)
@@ -35,6 +35,9 @@ extension ViewController{
                 self.tableView.reloadData()
             }
         }
+    }
+    func filterData(data: News) -> [Article]{
+        return data.articles.filter { $0.title != "[Removed]"}
     }
 }
 //MARK: TABLEVIEW
@@ -46,10 +49,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         var context = cell.defaultContentConfiguration()
-        
         context.text = newsItem[indexPath.row].title
         context.secondaryText = newsItem[indexPath.row].description
-        
         cell.contentConfiguration = context
         return cell
     }
