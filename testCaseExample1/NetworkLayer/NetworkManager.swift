@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-final class NetworkManager{
+final class NetworkManager {
     static let shared = NetworkManager()
     
     func request<T: Codable>(from url: URL ,method: HTTPMethods ,completion: @escaping(Result<T, ErrorTypes>) -> Void){
@@ -33,5 +33,4 @@ final class NetworkManager{
             }
         }
     }
-    
 }

@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--News-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="testCaseExample1" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,7 +34,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="05a-HK-TwN" secondAttribute="trailing" id="x1A-xY-e5I"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dmS-tC-8sb"/>
+                    <navigationItem key="navigationItem" title="News" id="dmS-tC-8sb"/>
                     <connections>
                         <outlet property="tableView" destination="05a-HK-TwN" id="Uib-VB-cJo"/>
                         <segue destination="eJg-xj-Wna" kind="show" identifier="toDescriptionVC" id="Yc5-02-sYf"/>
@@ -44,7 +44,7 @@
             </objects>
             <point key="canvasLocation" x="1063.3587786259541" y="3.5211267605633805"/>
         </scene>
-        <!--Description View Controller-->
+        <!--Description-->
         <scene sceneID="es0-3A-NkO">
             <objects>
                 <viewController id="eJg-xj-Wna" customClass="DescriptionViewController" customModule="testCaseExample1" customModuleProvider="target" sceneMemberID="viewController">
@@ -93,7 +93,7 @@
                             <constraint firstItem="6pl-8b-Xms" firstAttribute="top" secondItem="NQL-Qz-iQu" secondAttribute="bottom" constant="62" id="tL2-sx-j7Y"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6D7-ZF-NF1"/>
+                    <navigationItem key="navigationItem" title="Description" id="6D7-ZF-NF1"/>
                     <connections>
                         <outlet property="contentLabel" destination="qqT-Py-aE3" id="05C-Nn-4Dh"/>
                         <outlet property="imageView" destination="6pl-8b-Xms" id="FOT-AD-jys"/>

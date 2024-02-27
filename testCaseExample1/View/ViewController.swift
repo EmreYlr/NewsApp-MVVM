@@ -10,47 +10,28 @@ import UIKit
 final class ViewController: UIViewController{
     //MARK: VARIABLES
     @IBOutlet weak var tableView: UITableView!
-    let homeViewModel = HomeViewModel()
-    var newsItem = [Article]()
+    private var homeViewModel: HomeViewModelProtocol = HomeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        fetchData()
+        homeViewModel.delegate = self
+        homeViewModel.fetchData()
     }
     
-}
-//MARK: FUNCTION
-extension ViewController{
-    func fetchData(){
-        homeViewModel.fetchData { response, error in
-            if let response = response{
-                self.newsItem = self.filterData(data: response)
-                //print(response)
-            }else{
-                print(error!)
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    func filterData(data: News) -> [Article]{
-        return data.articles.filter { $0.title != "[Removed]"}
-    }
 }
 //MARK: TABLEVIEW
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsItem.count
+        return homeViewModel.newsItem.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         var context = cell.defaultContentConfiguration()
-        context.text = newsItem[indexPath.row].title
-        context.secondaryText = newsItem[indexPath.row].description
+        context.text = homeViewModel.newsItem[indexPath.row].title
+        context.secondaryText = homeViewModel.newsItem[indexPath.row].description
         cell.contentConfiguration = context
         return cell
     }
@@ -61,10 +42,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDescriptionVC", let selectedRow = sender as? Int {
             let destination = segue.destination as! DescriptionViewController
-            let selectedArticle = newsItem[selectedRow]
+            let selectedArticle = homeViewModel.newsItem[selectedRow]
             destination.article = selectedArticle
         }
     }
     
 }
 
+extension ViewController: HomeViewModelOutputProtocol {
+    func update() {
+        self.tableView.reloadData()
+    }
+    
+    func error() {
+        print("")
+    }
+}
