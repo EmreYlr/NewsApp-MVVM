@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 final class DescriptionViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -13,44 +14,43 @@ final class DescriptionViewController: UIViewController {
     @IBOutlet weak var contentLabel: UILabel!
     
     //MARK: VARIABLE
-    var article: Article?
-    let descriptionViewModel = DescriptionViewModel()
+    var descriptionViewModel: DestinationViewModelProtocol = DescriptionViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTextOrEmpty(article?.title, for: titleLabel)
-        setTextOrEmpty(article?.content, for: contentLabel)
-        getImage()
+        descriptionViewModel.delegate = self
+        setTextOrEmpty(descriptionViewModel.article?.title, for: titleLabel)
+        setTextOrEmpty(descriptionViewModel.article?.content, for: contentLabel)
+        descriptionViewModel.loadImage()
     }
-}
-//MARK: FUNCTION
-extension DescriptionViewController{
-    func setTextOrEmpty(_ text: String?, for label: UILabel){
+    
+    func setTextOrEmpty(_ text: String?, for label: UILabel) {
         label.text = text ?? "Empty \(label.accessibilityIdentifier ?? "Field")"
     }
     
-    func getImage(){
-        if let imageUrlString = article?.urlToImage {
-            indicatorView.isHidden = false
-            indicatorView.startAnimating()
-            descriptionViewModel.loadImage(from: imageUrlString) { [weak self] responseData, error in
-                self?.indicatorView.stopAnimating()
-                self?.indicatorView.isHidden = true
-                if let response = responseData{
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: response, scale: 1)
-                        self?.imageView.image = image
-                    }
-                }
-                else{
-                    print(error!)
-                }
-            }
-        }
-        else{
-            imageView.image = UIImage(named: "noResult")
-            indicatorView.stopAnimating()
-            indicatorView.isHidden = true
-        }
-    }
 }
 
+extension DescriptionViewController: DescriptionViewModelOutputProtocol {
+    func update(with data: Data?) {
+        DispatchQueue.main.async {
+            if let data = data {
+                self.imageView.image = UIImage(data: data, scale: 1)
+            } else {
+                self.imageView.image = UIImage(named: "noResult")
+            }
+        }
+    }
+    
+    func startLoad() {
+        indicatorView.isHidden = false
+        indicatorView.startAnimating()
+    }
+    
+    func stopLoad() {
+        indicatorView.isHidden = true
+        indicatorView.stopAnimating()
+    }
+    
+    func error() {
+        print("")
+    }
+}

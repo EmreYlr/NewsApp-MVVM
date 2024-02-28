@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController{
+final class ViewController: UIViewController {
     //MARK: VARIABLES
     @IBOutlet weak var tableView: UITableView!
     private var homeViewModel: HomeViewModelProtocol = HomeViewModel()
@@ -22,7 +22,7 @@ final class ViewController: UIViewController{
     
 }
 //MARK: TABLEVIEW
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeViewModel.newsItem.count
     }
@@ -35,18 +35,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         cell.contentConfiguration = context
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "toDescriptionVC", sender: indexPath.row)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDescriptionVC", let selectedRow = sender as? Int {
             let destination = segue.destination as! DescriptionViewController
             let selectedArticle = homeViewModel.newsItem[selectedRow]
-            destination.article = selectedArticle
+            destination.descriptionViewModel.article = selectedArticle
         }
     }
-    
 }
 
 extension ViewController: HomeViewModelOutputProtocol {

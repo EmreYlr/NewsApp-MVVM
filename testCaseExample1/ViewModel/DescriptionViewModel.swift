@@ -6,19 +6,39 @@
 //
 
 import Foundation
-final class DescriptionViewModel{
-    func loadImage(from url: String, completion: @escaping (Data?, String?) -> Void){
-        if let url = URL(string: url){
-            NetworkManager.shared.requestData(from: url, method: .get) {result in
+
+protocol DestinationViewModelProtocol {
+    var article: Article? { get set }
+    var delegate: DescriptionViewModelOutputProtocol? { get set }
+    func loadImage()
+}
+
+protocol DescriptionViewModelOutputProtocol: AnyObject {
+    func update(with data: Data?)
+    func startLoad()
+    func stopLoad()
+    func error()
+}
+
+final class DescriptionViewModel {
+    var article:Article?
+    weak var delegate: DescriptionViewModelOutputProtocol?
+    
+    func loadImage(){
+        if let url = URL(string: article?.urlToImage ?? "") {
+            self.delegate?.startLoad()
+            NetworkManager.shared.requestData(from: url, method: .get) { [weak self] result in
                 switch result{
                 case .success(let data):
                     //print(data)
-                    completion(data, nil)
+                    self?.delegate?.update(with: data)
                 case .failure(let error):
-                    //print("Hata: \(error)")
-                    completion(nil,error.rawValue)
+                    print("Hata: \(error)")
+                    self?.delegate?.error()
                 }
+                self?.delegate?.stopLoad()
             }
         }
     }
 }
+extension DescriptionViewModel: DestinationViewModelProtocol {}

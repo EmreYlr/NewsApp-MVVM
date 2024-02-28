@@ -25,7 +25,7 @@ final class HomeViewModel {
     weak var delegate: HomeViewModelOutputProtocol?
     
     func fetchData() {
-        if let apiUrl = URL(string:"\(url)/top-headlines?country=us\(apiKey)"){
+        if let apiUrl = URL(string:"\(url)/top-headlines?country=us\(apiKey)") {
             NetworkManager.shared.request(from: apiUrl, method: .get) { [weak self] (result: Result<News, ErrorTypes>) in
                 switch result {
                 case .success(let data):
