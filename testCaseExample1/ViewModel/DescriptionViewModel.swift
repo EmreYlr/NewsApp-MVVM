@@ -25,19 +25,22 @@ final class DescriptionViewModel {
     weak var delegate: DescriptionViewModelOutputProtocol?
     
     func loadImage(){
-        if let url = URL(string: article?.urlToImage ?? "") {
-            self.delegate?.startLoad()
-            NetworkManager.shared.requestData(from: url, method: .get) { [weak self] result in
-                switch result{
-                case .success(let data):
-                    //print(data)
-                    self?.delegate?.update(with: data)
-                case .failure(let error):
-                    print("Hata: \(error)")
-                    self?.delegate?.error()
-                }
-                self?.delegate?.stopLoad()
+        guard let url = URL(string: article?.urlToImage ?? "")else{
+            self.delegate?.error()
+            self.delegate?.stopLoad()
+            return
+        }
+        self.delegate?.startLoad()
+        NetworkManager.shared.requestData(from: url, method: .get) { [weak self] result in
+            switch result{
+            case .success(let data):
+                //print(data)
+                self?.delegate?.update(with: data)
+            case .failure(let error):
+                print("Hata: \(error)")
+                self?.delegate?.error()
             }
+            self?.delegate?.stopLoad()
         }
     }
 }

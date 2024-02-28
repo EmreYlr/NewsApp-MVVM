@@ -34,8 +34,6 @@ extension DescriptionViewController: DescriptionViewModelOutputProtocol {
         DispatchQueue.main.async {
             if let data = data {
                 self.imageView.image = UIImage(data: data, scale: 1)
-            } else {
-                self.imageView.image = UIImage(named: "noResult")
             }
         }
     }
@@ -51,6 +49,7 @@ extension DescriptionViewController: DescriptionViewModelOutputProtocol {
     }
     
     func error() {
+        self.imageView.image = UIImage(named: "noResult")
         print("")
     }
 }
