@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		C36ADBF22B8CC70D00A5D265 /* DescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewModel.swift; sourceTree = "<group>"; };
-		C3CB02CD2B8B6A6300E99A2F /* testCaseExample1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testCaseExample1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3CB02CD2B8B6A6300E99A2F /* NewsApp-MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NewsApp-MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CB02D02B8B6A6300E99A2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3CB02D22B8B6A6300E99A2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C3CB02D42B8B6A6300E99A2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		C3CB02C42B8B6A6300E99A2F = {
 			isa = PBXGroup;
 			children = (
-				C3CB02CF2B8B6A6300E99A2F /* testCaseExample1 */,
+				C3CB02CF2B8B6A6300E99A2F /* NewsApp-MVVM */,
 				C3CB02CE2B8B6A6300E99A2F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,12 +62,12 @@
 		C3CB02CE2B8B6A6300E99A2F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3CB02CD2B8B6A6300E99A2F /* testCaseExample1.app */,
+				C3CB02CD2B8B6A6300E99A2F /* NewsApp-MVVM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C3CB02CF2B8B6A6300E99A2F /* testCaseExample1 */ = {
+		C3CB02CF2B8B6A6300E99A2F /* NewsApp-MVVM */ = {
 			isa = PBXGroup;
 			children = (
 				C3CB02E92B8B6A9C00E99A2F /* Resource */,
@@ -80,7 +80,7 @@
 				C3CB02DB2B8B6A6400E99A2F /* LaunchScreen.storyboard */,
 				C3CB02DE2B8B6A6400E99A2F /* Info.plist */,
 			);
-			path = testCaseExample1;
+			path = "NewsApp-MVVM";
 			sourceTree = "<group>";
 		};
 		C3CB02E42B8B6A7400E99A2F /* ViewModel */ = {
@@ -138,9 +138,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C3CB02CC2B8B6A6300E99A2F /* testCaseExample1 */ = {
+		C3CB02CC2B8B6A6300E99A2F /* NewsApp-MVVM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3CB02E12B8B6A6400E99A2F /* Build configuration list for PBXNativeTarget "testCaseExample1" */;
+			buildConfigurationList = C3CB02E12B8B6A6400E99A2F /* Build configuration list for PBXNativeTarget "NewsApp-MVVM" */;
 			buildPhases = (
 				C3CB02C92B8B6A6300E99A2F /* Sources */,
 				C3CB02CA2B8B6A6300E99A2F /* Frameworks */,
@@ -150,12 +150,12 @@
 			);
 			dependencies = (
 			);
-			name = testCaseExample1;
+			name = "NewsApp-MVVM";
 			packageProductDependencies = (
 				C3CB02EB2B8B6CD500E99A2F /* Alamofire */,
 			);
 			productName = testCaseExample1;
-			productReference = C3CB02CD2B8B6A6300E99A2F /* testCaseExample1.app */;
+			productReference = C3CB02CD2B8B6A6300E99A2F /* NewsApp-MVVM.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -173,7 +173,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C3CB02C82B8B6A6300E99A2F /* Build configuration list for PBXProject "testCaseExample1" */;
+			buildConfigurationList = C3CB02C82B8B6A6300E99A2F /* Build configuration list for PBXProject "NewsApp-MVVM" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -189,7 +189,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C3CB02CC2B8B6A6300E99A2F /* testCaseExample1 */,
+				C3CB02CC2B8B6A6300E99A2F /* NewsApp-MVVM */,
 			);
 		};
 /* End PBXProject section */
@@ -374,7 +374,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = US4P6S3B5V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = testCaseExample1/Info.plist;
+				INFOPLIST_FILE = "NewsApp-MVVM/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -402,7 +402,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = US4P6S3B5V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = testCaseExample1/Info.plist;
+				INFOPLIST_FILE = "NewsApp-MVVM/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -424,7 +424,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C3CB02C82B8B6A6300E99A2F /* Build configuration list for PBXProject "testCaseExample1" */ = {
+		C3CB02C82B8B6A6300E99A2F /* Build configuration list for PBXProject "NewsApp-MVVM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3CB02DF2B8B6A6400E99A2F /* Debug */,
@@ -433,7 +433,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3CB02E12B8B6A6400E99A2F /* Build configuration list for PBXNativeTarget "testCaseExample1" */ = {
+		C3CB02E12B8B6A6400E99A2F /* Build configuration list for PBXNativeTarget "NewsApp-MVVM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C3CB02E22B8B6A6400E99A2F /* Debug */,
